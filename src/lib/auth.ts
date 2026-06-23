@@ -3,14 +3,25 @@ import { createHmac } from 'crypto'
 
 const COOKIE_NAME = 'admin_token'
 
+function getSecret(): string {
+  const secret = process.env.COOKIE_SECRET
+  if (!secret) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('COOKIE_SECRET environment variable is required in production')
+    }
+    return 'dev-secret'
+  }
+  return secret
+}
+
 function sign(value: string): string {
-  const secret = process.env.COOKIE_SECRET || 'dev-secret'
+  const secret = getSecret()
   const hmac = createHmac('sha256', secret).update(value).digest('hex')
   return `${value}.${hmac}`
 }
 
 function verify(signed: string): boolean {
-  const secret = process.env.COOKIE_SECRET || 'dev-secret'
+  const secret = getSecret()
   const [value, hash] = signed.split('.')
   const expected = createHmac('sha256', secret).update(value).digest('hex')
   return hash === expected
