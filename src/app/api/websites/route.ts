@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   const status = request.nextUrl.searchParams.get('status') || 'approved'
   const categoryId = request.nextUrl.searchParams.get('categoryId')

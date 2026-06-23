@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'LostBug - 网站导航',
   description: '收集工作和生活中常用的网站',
