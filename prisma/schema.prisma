@@ -1,13 +1,75 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model Category {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  slug       String    @unique
+  sortOrder  Int       @default(0) @map("sort_order")
+  websites   Website[]
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  @@map("categories")
+}
+
+model Website {
+  id            Int          @id @default(autoincrement())
+  title         String
+  url           String       @unique
+  description   String       @default("")
+  favicon       String       @default("")
+  status        String       @default("pending")
+  submitterName String       @default("") @map("submitter_name")
+  upVotes       Int          @default(0) @map("up_votes")
+  downVotes     Int          @default(0) @map("down_votes")
+  categoryId    Int          @map("category_id")
+  category      Category     @relation(fields: [categoryId], references: [id])
+  tags          WebsiteTag[]
+  votes         Vote[]
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([categoryId, status])
+  @@index([upVotes, downVotes])
+  @@map("websites")
+}
+
+model Tag {
+  id        Int          @id @default(autoincrement())
+  name      String       @unique
+  slug      String       @unique
+  websites  WebsiteTag[]
+  createdAt DateTime     @default(now()) @map("created_at")
+
+  @@map("tags")
+}
+
+model WebsiteTag {
+  websiteId Int     @map("website_id")
+  tagId     Int     @map("tag_id")
+  website   Website @relation(fields: [websiteId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([websiteId, tagId])
+  @@map("website_tags")
+}
+
+model Vote {
+  id        Int      @id @default(autoincrement())
+  websiteId Int      @map("website_id")
+  visitorId String   @map("visitor_id")
+  voteType  String   @map("vote_type")
+  website   Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([websiteId, visitorId])
+  @@map("votes")
 }
