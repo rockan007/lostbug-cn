@@ -17,6 +17,7 @@ interface WebsiteCardProps {
 
 export default function WebsiteCard({ website }: WebsiteCardProps) {
   const hostname = new URL(website.url).hostname
+  const initial = hostname.charAt(0).toUpperCase()
 
   return (
     <div className="flex items-start gap-4 p-4 border rounded-lg hover:shadow-md transition-shadow bg-white">
@@ -25,6 +26,26 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
         upVotes={website.upVotes}
         downVotes={website.downVotes}
       />
+      {/* Favicon or letter avatar */}
+      <div className="shrink-0 mt-0.5">
+        {website.favicon ? (
+          <img
+            src={website.favicon}
+            alt=""
+            width={32}
+            height={32}
+            className="w-8 h-8 rounded"
+            onError={(e) => {
+              // Hide broken img so letter avatar takes over via CSS sibling
+              ;(e.target as HTMLImageElement).style.display = 'none'
+            }}
+          />
+        ) : null}
+        <div className={`w-8 h-8 rounded-full bg-blue-500 text-white text-sm font-bold flex items-center justify-center ${website.favicon ? 'hidden' : ''}`}
+          style={website.favicon ? { display: 'none' } : undefined}>
+          {initial}
+        </div>
+      </div>
       <div className="flex-1 min-w-0">
         <a
           href={website.url}

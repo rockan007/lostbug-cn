@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
+import { discoverFavicon } from '@/lib/favicon'
 
 export const dynamic = 'force-dynamic'
 
@@ -56,6 +57,7 @@ export async function POST(request: NextRequest) {
       submitterName: submitterName || '',
       status: 'pending',
       upVotes: 1,
+      favicon: await discoverFavicon(url),
       tags: {
         create: (tags || []).map((tagName: string) => ({
           tag: {
