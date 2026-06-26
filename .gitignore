@@ -49,3 +49,11 @@ next-env.d.ts
 # claude and superpowers
 .claude
 .superpowers
+
+# playwright screenshots
+.playwright-mcp/
+*.png
+
+# prisma
+prisma/migrations/
+

@@ -1,4 +1,5 @@
 import { PrismaClient } from '@/generated/prisma'
+import { PrismaPg } from '@prisma/adapter-pg'
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
 
@@ -6,7 +7,9 @@ let _prisma: PrismaClient | undefined
 
 function getPrisma(): PrismaClient {
   if (!_prisma) {
-    _prisma = globalForPrisma.prisma ?? new PrismaClient()
+    _prisma = globalForPrisma.prisma ?? new PrismaClient({
+      adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL! }),
+    })
     if (process.env.NODE_ENV !== 'production') {
       globalForPrisma.prisma = _prisma
     }
