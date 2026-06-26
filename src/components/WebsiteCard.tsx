@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import VoteButtons from './VoteButtons'
 
@@ -16,6 +19,7 @@ interface WebsiteCardProps {
 }
 
 export default function WebsiteCard({ website }: WebsiteCardProps) {
+  const [imgError, setImgError] = useState(false)
   const hostname = new URL(website.url).hostname
   const initial = hostname.charAt(0).toUpperCase()
 
@@ -28,21 +32,18 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
       />
       {/* Favicon or letter avatar */}
       <div className="shrink-0 mt-0.5">
-        {website.favicon ? (
+        {website.favicon && !imgError ? (
           <img
             src={website.favicon}
             alt=""
             width={32}
             height={32}
             className="w-8 h-8 rounded"
-            onError={(e) => {
-              // Hide broken img so letter avatar takes over via CSS sibling
-              ;(e.target as HTMLImageElement).style.display = 'none'
-            }}
+            onError={() => setImgError(true)}
           />
         ) : null}
-        <div className={`w-8 h-8 rounded-full bg-blue-500 text-white text-sm font-bold flex items-center justify-center ${website.favicon ? 'hidden' : ''}`}
-          style={website.favicon ? { display: 'none' } : undefined}>
+        <div className={`w-8 h-8 rounded-full bg-blue-500 text-white text-sm font-bold flex items-center justify-center ${!website.favicon || imgError ? '' : 'hidden'}`}
+          style={!website.favicon || imgError ? undefined : { display: 'none' }}>
           {initial}
         </div>
       </div>
