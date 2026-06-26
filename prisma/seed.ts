@@ -1,6 +1,9 @@
 import { PrismaClient } from '../src/generated/prisma'
+import { PrismaPg } from '@prisma/adapter-pg'
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL! }),
+})
 
 const categories = [
   { name: '设计工具', slug: 'design', sortOrder: 1 },
@@ -20,14 +23,14 @@ async function main() {
     })
   }
   const sampleSites = [
-    { title: 'Figma', url: 'https://www.figma.com', description: '协作式界面设计工具', category: 'design', tags: ['UI', '原型'] },
-    { title: 'GitHub', url: 'https://github.com', description: '代码托管与协作平台', category: 'dev', tags: ['代码', '协作'] },
-    { title: 'Notion', url: 'https://www.notion.so', description: '多功能笔记与知识管理', category: 'productivity', tags: ['笔记', '协作'] },
-    { title: 'Canva', url: 'https://www.canva.com', description: '在线平面设计工具', category: 'design', tags: ['设计', '模板'] },
-    { title: 'MDN', url: 'https://developer.mozilla.org', description: 'Web 开发技术文档', category: 'dev', tags: ['文档', '前端'] },
-    { title: '掘金', url: 'https://juejin.cn', description: '开发者技术社区', category: 'dev', tags: ['社区', '文章'] },
-    { title: 'InfoQ', url: 'https://www.infoq.cn', description: '技术资讯与行业动态', category: 'news', tags: ['技术', '资讯'] },
-    { title: '豆瓣', url: 'https://www.douban.com', description: '图书电影音乐社区', category: 'life', tags: ['书籍', '电影'] },
+    { title: 'Figma', url: 'https://www.figma.com', description: '协作式界面设计工具', category: 'design', tags: ['UI', '原型'], favicon: 'https://www.figma.com/favicon.ico' },
+    { title: 'GitHub', url: 'https://github.com', description: '代码托管与协作平台', category: 'dev', tags: ['代码', '协作'], favicon: 'https://github.com/favicon.ico' },
+    { title: 'Notion', url: 'https://www.notion.so', description: '多功能笔记与知识管理', category: 'productivity', tags: ['笔记', '协作'], favicon: 'https://www.notion.so/favicon.ico' },
+    { title: 'Canva', url: 'https://www.canva.com', description: '在线平面设计工具', category: 'design', tags: ['设计', '模板'], favicon: 'https://www.canva.com/favicon.ico' },
+    { title: 'MDN', url: 'https://developer.mozilla.org', description: 'Web 开发技术文档', category: 'dev', tags: ['文档', '前端'], favicon: 'https://developer.mozilla.org/favicon.ico' },
+    { title: '掘金', url: 'https://juejin.cn', description: '开发者技术社区', category: 'dev', tags: ['社区', '文章'], favicon: 'https://juejin.cn/favicon.ico' },
+    { title: 'InfoQ', url: 'https://www.infoq.cn', description: '技术资讯与行业动态', category: 'news', tags: ['技术', '资讯'], favicon: 'https://www.infoq.cn/favicon.ico' },
+    { title: '豆瓣', url: 'https://www.douban.com', description: '图书电影音乐社区', category: 'life', tags: ['书籍', '电影'], favicon: 'https://www.douban.com/favicon.ico' },
   ]
 
   for (const site of sampleSites) {
@@ -40,6 +43,7 @@ async function main() {
         title: site.title,
         url: site.url,
         description: site.description,
+        favicon: site.favicon,
         categoryId: category.id,
         status: 'approved',
         upVotes: Math.floor(Math.random() * 20) + 1,
