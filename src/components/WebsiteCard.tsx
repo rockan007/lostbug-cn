@@ -20,7 +20,12 @@ interface WebsiteCardProps {
 
 export default function WebsiteCard({ website }: WebsiteCardProps) {
   const [imgError, setImgError] = useState(false)
-  const hostname = new URL(website.url).hostname
+  let hostname: string
+  try {
+    hostname = new URL(website.url).hostname
+  } catch {
+    hostname = website.url
+  }
   const initial = hostname.charAt(0).toUpperCase()
 
   return (
