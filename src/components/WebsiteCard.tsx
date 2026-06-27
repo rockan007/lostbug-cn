@@ -30,11 +30,6 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
 
   return (
     <div className="flex items-start gap-4 p-4 border rounded-lg hover:shadow-md transition-shadow bg-white">
-      <VoteButtons
-        websiteId={website.id}
-        upVotes={website.upVotes}
-        downVotes={website.downVotes}
-      />
       {/* Favicon or letter avatar */}
       <div className="shrink-0 mt-0.5">
         {website.favicon && !imgError ? (
@@ -83,6 +78,11 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
           ))}
         </div>
       </div>
+      <VoteButtons
+        websiteId={website.id}
+        upVotes={website.upVotes}
+        downVotes={website.downVotes}
+      />
     </div>
   )
 }
