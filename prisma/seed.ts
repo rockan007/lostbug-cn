@@ -28,6 +28,7 @@ async function main() {
     { title: 'Figma', url: 'https://www.figma.com', description: '协作式界面设计工具', category: 'design', tags: ['UI', '原型'] },
     { title: 'GitHub', url: 'https://github.com', description: '代码托管与协作平台', category: 'dev', tags: ['代码', '协作'] },
     { title: 'Notion', url: 'https://www.notion.so', description: '多功能笔记与知识管理', category: 'productivity', tags: ['笔记', '协作'] },
+    { title: 'Obsidian', url: 'https://obsidian.md', description: '本地化 Markdown 笔记与知识库', category: 'productivity', tags: ['笔记', '知识库'] },
     { title: 'Canva', url: 'https://www.canva.cn', description: '在线平面设计工具', category: 'design', tags: ['设计', '模板'] },
     { title: 'MDN', url: 'https://developer.mozilla.org', description: 'Web 开发技术文档', category: 'dev', tags: ['文档', '前端'] },
     { title: '掘金', url: 'https://juejin.cn', description: '开发者技术社区', category: 'dev', tags: ['社区', '文章'] },
