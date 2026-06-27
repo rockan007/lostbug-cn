@@ -43,6 +43,8 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
             width={32}
             height={32}
             className="w-8 h-8 rounded"
+            referrerPolicy="no-referrer"
+            crossOrigin="anonymous"
             onError={() => setImgError(true)}
           />
         ) : null}
