@@ -29,16 +29,19 @@ model Website {
   submitterName String       @default("") @map("submitter_name")
   upVotes       Int          @default(0) @map("up_votes")
   downVotes     Int          @default(0) @map("down_votes")
+  jumpCount     Int          @default(0) @map("jump_count")
   categoryId    Int          @map("category_id")
   category      Category     @relation(fields: [categoryId], references: [id])
   tags          WebsiteTag[]
   votes         Vote[]
+  jumps         Jump[]
   createdAt     DateTime     @default(now()) @map("created_at")
   updatedAt     DateTime     @updatedAt @map("updated_at")
 
   @@index([status])
   @@index([categoryId, status])
   @@index([upVotes, downVotes])
+  @@index([jumpCount])
   @@map("websites")
 }
 
@@ -72,4 +75,15 @@ model Vote {
 
   @@unique([websiteId, visitorId])
   @@map("votes")
+}
+
+model Jump {
+  id        Int      @id @default(autoincrement())
+  websiteId Int      @map("website_id")
+  visitorId String   @map("visitor_id")
+  website   Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([websiteId, visitorId])
+  @@map("jumps")
 }
