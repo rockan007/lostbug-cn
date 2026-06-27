@@ -112,6 +112,12 @@ export async function discoverFavicon(websiteUrl: string): Promise<string> {
     const ok = await urlReachable(faviconUrl, 8000)
     if (ok) return faviconUrl
 
+    // Step 3: Fall back to Google favicon service — handles sites behind
+    //   Cloudflare (e.g. chatgpt.com) and other fetch-blocking scenarios
+    const googleFavicon = `https://www.google.com/s2/favicons?domain=${parsed.hostname}&sz=32`
+    const googleOk = await urlReachable(googleFavicon, 8000)
+    if (googleOk) return googleFavicon
+
     return ''
   } catch {
     return ''
