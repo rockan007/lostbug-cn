@@ -39,31 +39,35 @@ export default function LayoutShell({
   if (!mounted) {
     // SSR placeholder — no sidebar flash
     return (
-      <>
+      <div className="h-screen overflow-hidden flex flex-col">
         <Navbar />
-        <div className="flex">
-          <div className="hidden lg:block w-12 shrink-0 border-r bg-gray-50 min-h-[calc(100vh-3.5rem)]" />
-          <main className="flex-1 min-w-0 max-w-6xl mx-auto px-4 py-8">
-            {children}
+        <div className="flex flex-1 min-h-0">
+          <div className="hidden lg:block w-12 shrink-0 border-r bg-gray-50 overflow-y-auto" />
+          <main className="flex-1 min-w-0 overflow-y-auto">
+            <div className="max-w-6xl mx-auto px-4 py-8">
+              {children}
+            </div>
           </main>
         </div>
-      </>
+      </div>
     )
   }
 
   return (
-    <>
+    <div className="h-screen overflow-hidden flex flex-col">
       <Navbar onToggleSidebar={toggleSidebar} />
-      <div className="flex">
+      <div className="flex flex-1 min-h-0">
         <Sidebar
           categories={categories}
           open={sidebarOpen}
           onToggle={toggleSidebar}
         />
-        <main className="flex-1 min-w-0 max-w-6xl mx-auto px-4 py-8">
-          {children}
+        <main className="flex-1 min-w-0 overflow-y-auto">
+          <div className="max-w-6xl mx-auto px-4 py-8">
+            {children}
+          </div>
         </main>
       </div>
-    </>
+    </div>
   )
 }

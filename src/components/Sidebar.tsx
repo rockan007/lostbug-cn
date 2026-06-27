@@ -26,13 +26,13 @@ export default function Sidebar({
   // Avoid hydration mismatch: render collapsed placeholder until mounted
   if (!mounted) {
     return (
-      <aside className="hidden lg:block w-12 shrink-0 border-r bg-gray-50 min-h-[calc(100vh-3.5rem)]" />
+      <aside className="hidden lg:block w-12 shrink-0 border-r bg-gray-50 overflow-y-auto" />
     )
   }
 
   if (!open) {
     return (
-      <aside className="hidden lg:flex flex-col items-center w-12 shrink-0 border-r bg-gray-50 min-h-[calc(100vh-3.5rem)] pt-3">
+      <aside className="hidden lg:flex flex-col items-center w-12 shrink-0 border-r bg-gray-50 overflow-y-auto pt-3">
         <button
           onClick={onToggle}
           className="p-1.5 rounded hover:bg-gray-200 text-gray-500"
@@ -45,7 +45,7 @@ export default function Sidebar({
   }
 
   return (
-    <aside className="hidden lg:flex flex-col w-48 shrink-0 border-r bg-gray-50 p-3 gap-0.5 min-h-[calc(100vh-3.5rem)]">
+    <aside className="hidden lg:flex flex-col w-48 shrink-0 border-r bg-gray-50 p-3 gap-0.5 overflow-y-auto">
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs font-semibold text-gray-500 uppercase">导航</span>
         <button
