@@ -13,6 +13,7 @@ const categories = [
   { name: '学习资源', slug: 'learning', sortOrder: 4 },
   { name: '资讯阅读', slug: 'news', sortOrder: 5 },
   { name: '生活服务', slug: 'life', sortOrder: 6 },
+  { name: 'AI 工具', slug: 'ai', sortOrder: 7 },
 ]
 
 async function main() {
@@ -32,6 +33,14 @@ async function main() {
     { title: '掘金', url: 'https://juejin.cn', description: '开发者技术社区', category: 'dev', tags: ['社区', '文章'] },
     { title: 'InfoQ', url: 'https://www.infoq.cn', description: '技术资讯与行业动态', category: 'news', tags: ['技术', '资讯'] },
     { title: '豆瓣', url: 'https://www.douban.com', description: '图书电影音乐社区', category: 'life', tags: ['书籍', '电影'] },
+    { title: 'ChatGPT', url: 'https://chatgpt.com', description: 'OpenAI 对话式 AI 助手', category: 'ai', tags: ['AI', '对话'] },
+    { title: 'Claude', url: 'https://claude.ai', description: 'Anthropic 出品的 AI 助手', category: 'ai', tags: ['AI', '对话'] },
+    { title: 'Gemini', url: 'https://gemini.google.com', description: 'Google 多模态 AI 模型', category: 'ai', tags: ['AI', '多模态'] },
+    { title: 'DeepSeek', url: 'https://chat.deepseek.com', description: '国产开源大语言模型', category: 'ai', tags: ['AI', '开源'] },
+    { title: 'Kimi', url: 'https://kimi.moonshot.cn', description: '月之暗面 AI 长文本助手', category: 'ai', tags: ['AI', '长文本'] },
+    { title: 'Perplexity', url: 'https://www.perplexity.ai', description: 'AI 驱动的搜索引擎', category: 'ai', tags: ['AI', '搜索'] },
+    { title: 'Midjourney', url: 'https://www.midjourney.com', description: 'AI 图像生成工具', category: 'ai', tags: ['AI', '图像'] },
+    { title: '通义千问', url: 'https://tongyi.aliyun.com', description: '阿里云 AI 大模型', category: 'ai', tags: ['AI', '对话'] },
   ]
 
   for (const site of sampleSites) {

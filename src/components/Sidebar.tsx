@@ -17,6 +17,7 @@ const ICONS: Record<string, string> = {
   learning: '📚',
   news: '📰',
   life: '🏠',
+  ai: '🤖',
 }
 
 export default function Sidebar({
