@@ -7,13 +7,13 @@ const prisma = new PrismaClient({
 })
 
 const categories = [
+  { name: 'AI 工具', slug: 'ai', sortOrder: 0 },
   { name: '设计工具', slug: 'design', sortOrder: 1 },
   { name: '开发资源', slug: 'dev', sortOrder: 2 },
   { name: '效率工具', slug: 'productivity', sortOrder: 3 },
   { name: '学习资源', slug: 'learning', sortOrder: 4 },
   { name: '资讯阅读', slug: 'news', sortOrder: 5 },
   { name: '生活服务', slug: 'life', sortOrder: 6 },
-  { name: 'AI 工具', slug: 'ai', sortOrder: 7 },
 ]
 
 async function main() {
@@ -41,6 +41,7 @@ async function main() {
     { title: 'Perplexity', url: 'https://www.perplexity.ai', description: 'AI 驱动的搜索引擎', category: 'ai', tags: ['AI', '搜索'] },
     { title: 'Midjourney', url: 'https://www.midjourney.com', description: 'AI 图像生成工具', category: 'ai', tags: ['AI', '图像'] },
     { title: '通义千问', url: 'https://tongyi.aliyun.com', description: '阿里云 AI 大模型', category: 'ai', tags: ['AI', '对话'] },
+    { title: '智谱AI', url: 'https://open.bigmodel.cn', description: '智谱AI大模型开放平台', category: 'ai', tags: ['AI', '大模型'] },
   ]
 
   for (const site of sampleSites) {
