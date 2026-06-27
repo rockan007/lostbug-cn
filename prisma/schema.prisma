@@ -65,6 +65,7 @@ model WebsiteTag {
   @@map("website_tags")
 }
 
+// @deprecated V1 — replaced by Jump model for click-based ranking. Remove after next migration.
 model Vote {
   id        Int      @id @default(autoincrement())
   websiteId Int      @map("website_id")
