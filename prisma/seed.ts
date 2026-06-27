@@ -43,6 +43,13 @@ async function main() {
     { title: 'Midjourney', url: 'https://www.midjourney.com', description: 'AI 图像生成工具', category: 'ai', tags: ['AI', '图像'] },
     { title: '通义千问', url: 'https://tongyi.aliyun.com', description: '阿里云 AI 大模型', category: 'ai', tags: ['AI', '对话'] },
     { title: '智谱AI', url: 'https://open.bigmodel.cn', description: '智谱AI大模型开放平台', category: 'ai', tags: ['AI', '大模型'] },
+    { title: 'Coursera', url: 'https://www.coursera.org', description: '全球名校在线课程平台', category: 'learning', tags: ['课程', '名校'] },
+    { title: 'B站', url: 'https://www.bilibili.com', description: '海量免费中文视频教程', category: 'learning', tags: ['视频', '教程'] },
+    { title: 'freeCodeCamp', url: 'https://www.freecodecamp.org', description: '免费编程学习平台', category: 'learning', tags: ['编程', '免费'] },
+    { title: 'LeetCode', url: 'https://leetcode.cn', description: '算法面试刷题平台', category: 'learning', tags: ['算法', '面试'] },
+    { title: '网易公开课', url: 'https://open.163.com', description: '国内外名校公开课', category: 'learning', tags: ['课程', '公开课'] },
+    { title: 'd2l.ai', url: 'https://d2l.ai', description: '动手学深度学习在线教材', category: 'learning', tags: ['深度学习', '教材'] },
+    { title: 'Google Developers', url: 'https://developers.google.com', description: 'Google 开发者文档', category: 'learning', tags: ['文档', '开发'] },
   ]
 
   for (const site of sampleSites) {
