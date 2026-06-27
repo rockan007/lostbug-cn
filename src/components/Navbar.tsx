@@ -18,7 +18,7 @@ export default function Navbar({ onToggleSidebar }: { onToggleSidebar?: () => vo
           LostBug
         </Link>
 
-        <form action="/search" className="flex-1 max-w-md">
+        <form action="/search" className="ml-auto max-w-md">
           <input
             type="text"
             name="q"
