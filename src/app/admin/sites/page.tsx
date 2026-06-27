@@ -32,7 +32,7 @@ export default async function AdminSitesPage() {
               <th className="pb-2 font-medium">网站</th>
               <th className="pb-2 font-medium">分类</th>
               <th className="pb-2 font-medium">状态</th>
-              <th className="pb-2 font-medium">投票</th>
+              <th className="pb-2 font-medium">点击</th>
               <th className="pb-2 font-medium">时间</th>
             </tr>
           </thead>
@@ -52,7 +52,7 @@ export default async function AdminSitesPage() {
                   </span>
                 </td>
                 <td className="py-3 text-gray-600">
-                  ▲{site.upVotes} ▼{site.downVotes}
+                  {site.jumpCount} 次点击
                 </td>
                 <td className="py-3 text-gray-400 text-xs">
                   {new Date(site.createdAt).toLocaleDateString('zh-CN')}

@@ -30,7 +30,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const websites = await db.website.findMany({
     where,
     include: { category: true, tags: { include: { tag: true } } },
-    orderBy: [{ upVotes: 'desc' }, { downVotes: 'asc' }],
+    orderBy: { jumpCount: 'desc' },
     take: 50,
   })
 

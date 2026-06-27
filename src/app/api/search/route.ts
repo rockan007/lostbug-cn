@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
       category: true,
       tags: { include: { tag: true } },
     },
-    orderBy: [{ upVotes: 'desc' }, { downVotes: 'asc' }],
+    orderBy: { jumpCount: 'desc' },
     take: 50,
   })
 

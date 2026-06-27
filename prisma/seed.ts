@@ -52,7 +52,7 @@ async function main() {
         favicon,
         categoryId: category.id,
         status: 'approved',
-        upVotes: Math.floor(Math.random() * 20) + 1,
+        jumpCount: Math.floor(Math.random() * 100),
         tags: {
           create: site.tags.map(tagName => ({
             tag: {

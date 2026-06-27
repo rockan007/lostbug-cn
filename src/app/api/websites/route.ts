@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export async function GET(request: NextRequest) {
   const status = request.nextUrl.searchParams.get('status') || 'approved'
   const categoryId = request.nextUrl.searchParams.get('categoryId')
-  const sort = request.nextUrl.searchParams.get('sort') || 'votes'
+  const sort = request.nextUrl.searchParams.get('sort') || 'jumps'
   const page = parseInt(request.nextUrl.searchParams.get('page') || '1')
   const limit = parseInt(request.nextUrl.searchParams.get('limit') || '20')
 
@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
   const orderBy: any = sort === 'newest'
     ? { createdAt: 'desc' as const }
-    : [{ upVotes: 'desc' as const }, { downVotes: 'asc' as const }]
+    : { jumpCount: 'desc' as const }
 
   const [websites, total] = await Promise.all([
     db.website.findMany({
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
       categoryId: parseInt(categoryId),
       submitterName: submitterName || '',
       status: 'pending',
-      upVotes: 1,
+      jumpCount: 0,
       favicon: await discoverFavicon(url),
       tags: {
         create: (tags || []).map((tagName: string) => ({

@@ -20,7 +20,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
       websites: {
         where: { status: 'approved' },
         include: { tags: { include: { tag: true } } },
-        orderBy: [{ upVotes: 'desc' }, { downVotes: 'asc' }],
+        orderBy: { jumpCount: 'desc' },
       },
     },
   })
