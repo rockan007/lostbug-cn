@@ -85,7 +85,7 @@ export default function Sidebar({
           className="p-1 rounded hover:bg-gray-200 text-gray-400 text-sm"
           aria-label="折叠侧边栏"
         >
-          ◀
+          ☰
         </button>
       </div>
 
