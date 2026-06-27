@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { getVisitorId } from '@/lib/visitor'
+import { Prisma } from '@/generated/prisma'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,27 +18,42 @@ export async function POST(
 
   const visitorId = await getVisitorId()
 
-  const website = await db.website.findUnique({ where: { id: websiteId } })
-  if (!website) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  try {
+    const result = await db.$transaction(async (tx) => {
+      const website = await tx.website.findUnique({ where: { id: websiteId } })
+      if (!website) {
+        return { __tag: 'notFound' as const }
+      }
+
+      // Idempotent: if visitor already jumped, don't increment
+      const existing = await tx.jump.findUnique({
+        where: { websiteId_visitorId: { websiteId, visitorId } },
+      })
+
+      if (existing) {
+        return { __tag: 'ok' as const, jumpCount: website.jumpCount }
+      }
+
+      await tx.jump.create({ data: { websiteId, visitorId } })
+      const updated = await tx.website.update({
+        where: { id: websiteId },
+        data: { jumpCount: { increment: 1 } },
+      })
+
+      return { __tag: 'ok' as const, jumpCount: updated.jumpCount }
+    })
+
+    if (result.__tag === 'notFound') {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    }
+
+    return NextResponse.json({ jumpCount: result.jumpCount })
+  } catch (error) {
+    // P2002 = unique constraint violation — a concurrent request beat us to it
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+      const website = await db.website.findUnique({ where: { id: websiteId } })
+      return NextResponse.json({ jumpCount: website?.jumpCount ?? 0 })
+    }
+    throw error
   }
-
-  // Idempotent: if visitor already jumped, don't increment
-  const existing = await db.jump.findUnique({
-    where: { websiteId_visitorId: { websiteId, visitorId } },
-  })
-
-  if (existing) {
-    return NextResponse.json({ jumpCount: website.jumpCount })
-  }
-
-  const updated = await db.$transaction([
-    db.jump.create({ data: { websiteId, visitorId } }),
-    db.website.update({
-      where: { id: websiteId },
-      data: { jumpCount: { increment: 1 } },
-    }),
-  ])
-
-  return NextResponse.json({ jumpCount: updated[1].jumpCount })
 }
