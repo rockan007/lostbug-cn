@@ -42,6 +42,13 @@ export default function Sidebar({
   if (!open) {
     return (
       <aside className="hidden lg:flex flex-col items-center absolute left-0 top-0 h-full w-12 bg-gray-50 border-r overflow-y-auto z-30 pt-2 gap-1">
+        <button
+          onClick={onToggle}
+          className="p-1.5 rounded hover:bg-gray-200 text-gray-500 mb-1"
+          aria-label="展开侧边栏"
+        >
+          ☰
+        </button>
         <Link
           href="/"
           className={`p-1.5 rounded text-sm ${
@@ -68,9 +75,20 @@ export default function Sidebar({
     )
   }
 
-  // Expanded: overlay panel on top of content with shadow
+  // Expanded: overlay panel with collapse button at top right
   return (
     <aside className="hidden lg:flex flex-col absolute left-0 top-0 h-full w-48 bg-gray-50 border-r shadow-lg overflow-y-auto z-30 p-3 gap-0.5">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-semibold text-gray-500 uppercase">导航</span>
+        <button
+          onClick={onToggle}
+          className="p-1 rounded hover:bg-gray-200 text-gray-400 text-sm"
+          aria-label="折叠侧边栏"
+        >
+          ◀
+        </button>
+      </div>
+
       <Link
         href="/"
         className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-md transition-colors ${

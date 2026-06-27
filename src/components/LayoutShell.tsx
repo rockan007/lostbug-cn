@@ -55,7 +55,7 @@ export default function LayoutShell({
 
     return (
       <div className="h-screen overflow-hidden flex flex-col">
-        <Navbar onToggleSidebar={toggleSidebar} />
+        <Navbar />
         <div className="flex flex-1 min-h-0 relative">
           <Sidebar
             categories={categories}
