@@ -18,6 +18,7 @@ interface WebsiteCardProps {
 
 export default function WebsiteCard({ website }: WebsiteCardProps) {
   const [imgError, setImgError] = useState(false)
+  const [displayCount, setDisplayCount] = useState(website.jumpCount)
   let hostname: string
   try {
     hostname = new URL(website.url).hostname
@@ -27,6 +28,7 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
   const initial = hostname.charAt(0).toUpperCase()
 
   function handleClick() {
+    setDisplayCount(prev => prev + 1)
     navigator.sendBeacon?.(`/api/websites/${website.id}/jump`)
   }
 
@@ -83,7 +85,7 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
       </div>
       {/* Jump count display */}
       <div className="flex items-center gap-1 text-sm text-gray-400 shrink-0">
-        <span className="font-medium tabular-nums">{website.jumpCount}</span>
+        <span className="font-medium tabular-nums">{displayCount}</span>
         <span className="text-xs">次访问</span>
       </div>
     </div>
