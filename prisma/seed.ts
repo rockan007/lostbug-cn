@@ -53,7 +53,7 @@ async function main() {
 
     await prisma.website.upsert({
       where: { url: site.url },
-      update: { favicon },
+      update: favicon ? { favicon } : {},
       create: {
         title: site.title,
         url: site.url,
