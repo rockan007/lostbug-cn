@@ -4,16 +4,6 @@ export default function Navbar({ onToggleSidebar }: { onToggleSidebar?: () => vo
   return (
     <nav className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <div className="max-w-full mx-auto px-4 h-14 flex items-center gap-4">
-        {onToggleSidebar && (
-          <button
-            onClick={onToggleSidebar}
-            className="p-1.5 rounded hover:bg-gray-100 text-gray-600 hidden lg:block"
-            aria-label="切换侧边栏"
-          >
-            ☰
-          </button>
-        )}
-
         <Link href="/" className="font-bold text-lg text-gray-800 shrink-0">
           LostBug
         </Link>
@@ -33,6 +23,16 @@ export default function Navbar({ onToggleSidebar }: { onToggleSidebar?: () => vo
         >
           + 推荐网站
         </Link>
+
+        {onToggleSidebar && (
+          <button
+            onClick={onToggleSidebar}
+            className="p-1.5 rounded hover:bg-gray-100 text-gray-600 hidden lg:block"
+            aria-label="切换侧边栏"
+          >
+            ☰
+          </button>
+        )}
       </div>
     </nav>
   )

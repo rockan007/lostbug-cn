@@ -10,6 +10,15 @@ interface Category {
   count: number
 }
 
+const ICONS: Record<string, string> = {
+  design: '🎨',
+  dev: '💻',
+  productivity: '⚡',
+  learning: '📚',
+  news: '📰',
+  life: '🏠',
+}
+
 export default function Sidebar({
   categories,
   open,
@@ -23,7 +32,6 @@ export default function Sidebar({
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
 
-  // Avoid hydration mismatch: render collapsed placeholder until mounted
   if (!mounted) {
     return (
       <aside className="hidden lg:block w-12 shrink-0 border-r bg-gray-50 overflow-y-auto" />
@@ -32,38 +40,43 @@ export default function Sidebar({
 
   if (!open) {
     return (
-      <aside className="hidden lg:flex flex-col items-center w-12 shrink-0 border-r bg-gray-50 overflow-y-auto pt-3">
-        <button
-          onClick={onToggle}
-          className="p-1.5 rounded hover:bg-gray-200 text-gray-500"
-          aria-label="展开侧边栏"
+      <aside className="hidden lg:flex flex-col items-center w-12 shrink-0 border-r bg-gray-50 overflow-y-auto pt-2 gap-1">
+        <Link
+          href="/"
+          className={`p-1.5 rounded text-sm ${
+            pathname === '/' ? 'bg-blue-50' : 'hover:bg-gray-100'
+          }`}
+          title="热门推荐"
         >
-          ☰
-        </button>
+          🔥
+        </Link>
+        <div className="w-6 border-t border-gray-200 my-1" />
+        {categories.map((cat) => (
+          <Link
+            key={cat.slug}
+            href={`/category/${cat.slug}`}
+            className={`p-1.5 rounded text-sm ${
+              pathname === `/category/${cat.slug}` ? 'bg-blue-50' : 'hover:bg-gray-100'
+            }`}
+            title={cat.name}
+          >
+            {ICONS[cat.slug] ?? '📌'}
+          </Link>
+        ))}
       </aside>
     )
   }
 
   return (
     <aside className="hidden lg:flex flex-col w-48 shrink-0 border-r bg-gray-50 p-3 gap-0.5 overflow-y-auto">
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-xs font-semibold text-gray-500 uppercase">导航</span>
-        <button
-          onClick={onToggle}
-          className="p-1 rounded hover:bg-gray-200 text-gray-400 text-sm"
-          aria-label="折叠侧边栏"
-        >
-          ✕
-        </button>
-      </div>
-
       <Link
         href="/"
-        className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
+        className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-md transition-colors ${
           pathname === '/' ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-100'
         }`}
       >
-        🔥 热门推荐
+        <span>🔥</span>
+        <span>热门推荐</span>
       </Link>
 
       <div className="mt-2 mb-1">
@@ -74,13 +87,14 @@ export default function Sidebar({
         <Link
           key={cat.slug}
           href={`/category/${cat.slug}`}
-          className={`flex items-center justify-between px-3 py-1.5 text-sm rounded-md transition-colors ${
+          className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-md transition-colors ${
             pathname === `/category/${cat.slug}`
               ? 'bg-blue-50 text-blue-700 font-medium'
               : 'text-gray-700 hover:bg-gray-100'
           }`}
         >
-          <span>{cat.name}</span>
+          <span>{ICONS[cat.slug] ?? '📌'}</span>
+          <span className="flex-1">{cat.name}</span>
           <span className="text-xs text-gray-400 tabular-nums">{cat.count}</span>
         </Link>
       ))}
