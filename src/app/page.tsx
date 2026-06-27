@@ -8,7 +8,7 @@ export default async function HomePage() {
     db.website.findMany({
       where: { status: 'approved' },
       include: { category: true, tags: { include: { tag: true } } },
-      orderBy: [{ upVotes: 'desc' }, { downVotes: 'asc' }],
+      orderBy: { jumpCount: 'desc' },
       take: 10,
     }),
     db.website.findMany({

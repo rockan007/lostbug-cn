@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import VoteButtons from './VoteButtons'
 
 interface WebsiteCardProps {
   website: {
@@ -11,8 +10,7 @@ interface WebsiteCardProps {
     url: string
     description: string
     favicon: string
-    upVotes: number
-    downVotes: number
+    jumpCount: number
     category: { name: string; slug: string }
     tags: { tag: { name: string; slug: string } }[]
   }
@@ -27,6 +25,10 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
     hostname = website.url
   }
   const initial = hostname.charAt(0).toUpperCase()
+
+  function handleClick() {
+    navigator.sendBeacon?.(`/api/websites/${website.id}/jump`)
+  }
 
   return (
     <div className="flex items-start gap-4 p-4 border rounded-lg hover:shadow-md transition-shadow bg-white">
@@ -52,6 +54,7 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
           href={website.url}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleClick}
           className="text-blue-600 hover:underline font-medium"
         >
           {website.title}
@@ -78,11 +81,11 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
           ))}
         </div>
       </div>
-      <VoteButtons
-        websiteId={website.id}
-        upVotes={website.upVotes}
-        downVotes={website.downVotes}
-      />
+      {/* Jump count display */}
+      <div className="flex items-center gap-1 text-sm text-gray-400 shrink-0">
+        <span className="font-medium tabular-nums">{website.jumpCount}</span>
+        <span className="text-xs">次访问</span>
+      </div>
     </div>
   )
 }
