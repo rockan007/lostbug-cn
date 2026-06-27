@@ -34,13 +34,14 @@ export default function Sidebar({
 
   if (!mounted) {
     return (
-      <aside className="hidden lg:block w-12 shrink-0 border-r bg-gray-50 overflow-y-auto" />
+      <div className="hidden lg:block absolute left-0 top-0 h-full w-12 bg-gray-50 border-r overflow-y-auto z-30" />
     )
   }
 
+  // Collapsed: icon strip along the left edge
   if (!open) {
     return (
-      <aside className="hidden lg:flex flex-col items-center w-12 shrink-0 border-r bg-gray-50 overflow-y-auto pt-2 gap-1">
+      <aside className="hidden lg:flex flex-col items-center absolute left-0 top-0 h-full w-12 bg-gray-50 border-r overflow-y-auto z-30 pt-2 gap-1">
         <Link
           href="/"
           className={`p-1.5 rounded text-sm ${
@@ -67,8 +68,9 @@ export default function Sidebar({
     )
   }
 
+  // Expanded: overlay panel on top of content with shadow
   return (
-    <aside className="hidden lg:flex flex-col w-48 shrink-0 border-r bg-gray-50 p-3 gap-0.5 overflow-y-auto">
+    <aside className="hidden lg:flex flex-col absolute left-0 top-0 h-full w-48 bg-gray-50 border-r shadow-lg overflow-y-auto z-30 p-3 gap-0.5">
       <Link
         href="/"
         className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-md transition-colors ${

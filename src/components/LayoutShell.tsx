@@ -41,8 +41,8 @@ export default function LayoutShell({
     return (
       <div className="h-screen overflow-hidden flex flex-col">
         <Navbar />
-        <div className="flex flex-1 min-h-0">
-          <div className="hidden lg:block w-12 shrink-0 border-r bg-gray-50 overflow-y-auto" />
+        <div className="flex flex-1 min-h-0 relative">
+          <div className="hidden lg:block absolute left-0 top-0 h-full w-12 bg-gray-50 border-r overflow-y-auto z-30" />
           <main className="flex-1 min-w-0 overflow-y-auto">
             <div className="max-w-6xl mx-auto px-4 py-8">
               {children}
@@ -53,21 +53,21 @@ export default function LayoutShell({
     )
   }
 
-  return (
-    <div className="h-screen overflow-hidden flex flex-col">
-      <Navbar onToggleSidebar={toggleSidebar} />
-      <div className="flex flex-1 min-h-0">
-        <Sidebar
-          categories={categories}
-          open={sidebarOpen}
-          onToggle={toggleSidebar}
-        />
-        <main className="flex-1 min-w-0 overflow-y-auto">
-          <div className="max-w-6xl mx-auto px-4 py-8">
-            {children}
-          </div>
-        </main>
+    return (
+      <div className="h-screen overflow-hidden flex flex-col">
+        <Navbar onToggleSidebar={toggleSidebar} />
+        <div className="flex flex-1 min-h-0 relative">
+          <Sidebar
+            categories={categories}
+            open={sidebarOpen}
+            onToggle={toggleSidebar}
+          />
+          <main className="flex-1 min-w-0 overflow-y-auto">
+            <div className="max-w-6xl mx-auto px-4 py-8">
+              {children}
+            </div>
+          </main>
+        </div>
       </div>
-    </div>
-  )
+    )
 }
