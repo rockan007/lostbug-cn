@@ -42,8 +42,8 @@ export default function LayoutShell({
     return (
       <div className="h-screen overflow-hidden flex flex-col">
         <Navbar onMenuToggle={() => setMobileMenuOpen(prev => !prev)} />
-        <div className="flex flex-1 min-h-0 relative">
-          <div className="hidden lg:block absolute left-0 top-0 h-full w-12 bg-gray-50 border-r overflow-y-auto z-30" />
+        <div className="flex flex-1 min-h-0">
+          <div className="hidden lg:block relative flex-shrink-0 h-full w-12 bg-gray-50 border-r overflow-y-auto" />
           <main className="flex-1 min-w-0 overflow-y-auto">
             <div className="max-w-6xl mx-auto px-4 py-8">
               {children}
@@ -57,7 +57,7 @@ export default function LayoutShell({
     return (
       <div className="h-screen overflow-hidden flex flex-col">
         <Navbar onMenuToggle={() => setMobileMenuOpen(prev => !prev)} />
-        <div className="flex flex-1 min-h-0 relative">
+        <div className="flex flex-1 min-h-0">
           <Sidebar
             categories={categories}
             open={sidebarOpen}

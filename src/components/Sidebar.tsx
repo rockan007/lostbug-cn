@@ -39,7 +39,7 @@ export default function Sidebar({
 
   if (!mounted) {
     return (
-      <div className="hidden lg:block absolute left-0 top-0 h-full w-12 bg-gray-50 border-r overflow-y-auto z-30" />
+      <div className="hidden lg:block relative flex-shrink-0 h-full w-12 bg-gray-50 border-r overflow-y-auto" />
     )
   }
 
@@ -101,7 +101,7 @@ export default function Sidebar({
 
       {/* Desktop sidebar */}
       {!open ? (
-        <aside className="hidden lg:flex flex-col items-center absolute left-0 top-0 h-full w-12 bg-gray-50 border-r overflow-y-auto z-30 pt-2 gap-1">
+        <aside className="hidden lg:flex flex-col items-center relative flex-shrink-0 h-full w-12 bg-gray-50 border-r overflow-y-auto pt-2 gap-1">
           <button
             onClick={onToggle}
             className="p-1.5 rounded hover:bg-gray-200 text-gray-500 mb-1"
@@ -133,7 +133,7 @@ export default function Sidebar({
           ))}
         </aside>
       ) : (
-        <aside className="hidden lg:flex flex-col absolute left-0 top-0 h-full w-48 bg-gray-50 border-r shadow-lg overflow-y-auto z-30 p-3 gap-0.5">
+        <aside className="hidden lg:flex flex-col relative flex-shrink-0 h-full w-48 bg-gray-50 border-r shadow-lg overflow-y-auto p-3 gap-0.5">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-semibold text-gray-500 uppercase">导航</span>
             <button
