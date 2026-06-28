@@ -87,7 +87,7 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
       {/* Jump count display */}
       <div className="flex items-center gap-1 text-sm text-gray-400 shrink-0">
         <span className="font-medium tabular-nums">{displayCount}</span>
-        <span className="text-xs">次访问</span>
+        <span className="text-xs hidden sm:inline">次访问</span>
       </div>
     </div>
   )

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 
-export default function Navbar() {
+export default function Navbar({ onMenuToggle }: { onMenuToggle?: () => void }) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -20,6 +20,13 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <div className="max-w-full mx-auto px-4 h-14 flex items-center gap-4">
+        <button
+          onClick={onMenuToggle}
+          className="lg:hidden p-1.5 rounded hover:bg-gray-100 text-gray-600 shrink-0"
+          aria-label="打开菜单"
+        >
+          ☰
+        </button>
         <Link href="/" className="font-bold text-lg text-gray-800 shrink-0">
           LostBug
         </Link>

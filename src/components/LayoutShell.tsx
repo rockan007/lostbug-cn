@@ -18,6 +18,7 @@ export default function LayoutShell({
   children: React.ReactNode
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export default function LayoutShell({
     // SSR placeholder — no sidebar flash
     return (
       <div className="h-screen overflow-hidden flex flex-col">
-        <Navbar />
+        <Navbar onMenuToggle={() => setMobileMenuOpen(prev => !prev)} />
         <div className="flex flex-1 min-h-0 relative">
           <div className="hidden lg:block absolute left-0 top-0 h-full w-12 bg-gray-50 border-r overflow-y-auto z-30" />
           <main className="flex-1 min-w-0 overflow-y-auto">
@@ -55,12 +56,14 @@ export default function LayoutShell({
 
     return (
       <div className="h-screen overflow-hidden flex flex-col">
-        <Navbar />
+        <Navbar onMenuToggle={() => setMobileMenuOpen(prev => !prev)} />
         <div className="flex flex-1 min-h-0 relative">
           <Sidebar
             categories={categories}
             open={sidebarOpen}
             onToggle={toggleSidebar}
+            mobileOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
           />
           <main className="flex-1 min-w-0 overflow-y-auto">
             <div className="max-w-6xl mx-auto px-4 py-8">
