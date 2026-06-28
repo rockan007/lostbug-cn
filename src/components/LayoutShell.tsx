@@ -50,6 +50,16 @@ export default function LayoutShell({
             </div>
           </main>
         </div>
+        <footer className="shrink-0 bg-white border-t py-2 text-center">
+          <a
+            href="https://beian.miit.gov.cn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-gray-400 hover:text-gray-500"
+          >
+            鲁ICP备2024092947号-1
+          </a>
+        </footer>
       </div>
     )
   }
@@ -71,6 +81,16 @@ export default function LayoutShell({
             </div>
           </main>
         </div>
+        <footer className="shrink-0 bg-white border-t py-2 text-center">
+          <a
+            href="https://beian.miit.gov.cn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-gray-400 hover:text-gray-500"
+          >
+            鲁ICP备2024092947号-1
+          </a>
+        </footer>
       </div>
     )
 }
