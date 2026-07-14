@@ -20,6 +20,8 @@ const ICONS: Record<string, string> = {
   ai: '🤖',
 }
 
+const MAPFLOW_URL = 'https://mapflow.lostbug.cn'
+
 export default function Sidebar({
   categories,
   open,
@@ -76,6 +78,22 @@ export default function Sidebar({
             </Link>
 
             <div className="mt-2 mb-1">
+              <span className="text-xs font-semibold text-gray-400 uppercase px-3">本站工具</span>
+            </div>
+
+            <a
+              href={MAPFLOW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
+              className="flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-50 to-cyan-50 px-3 py-2 text-sm font-medium text-blue-700 ring-1 ring-blue-100 transition-colors hover:from-blue-100 hover:to-cyan-100"
+            >
+              <span>🗺️</span>
+              <span className="flex-1">MapFlow</span>
+              <span className="text-xs text-blue-400">↗</span>
+            </a>
+
+            <div className="mt-2 mb-1">
               <span className="text-xs font-semibold text-gray-400 uppercase px-3">分类</span>
             </div>
 
@@ -118,6 +136,16 @@ export default function Sidebar({
           >
             🔥
           </Link>
+          <a
+            href={MAPFLOW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded bg-blue-50 p-1.5 text-sm ring-1 ring-blue-100 hover:bg-blue-100"
+            title="本站工具 · MapFlow"
+            aria-label="打开本站工具 MapFlow"
+          >
+            🗺️
+          </a>
           <div className="w-6 border-t border-gray-200 my-1" />
           {categories.map((cat) => (
             <Link
@@ -154,6 +182,21 @@ export default function Sidebar({
             <span>🔥</span>
             <span>热门推荐</span>
           </Link>
+
+          <div className="mt-2 mb-1">
+            <span className="text-xs font-semibold text-gray-400 uppercase px-3">本站工具</span>
+          </div>
+
+          <a
+            href={MAPFLOW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-50 to-cyan-50 px-3 py-2 text-sm font-medium text-blue-700 ring-1 ring-blue-100 transition-colors hover:from-blue-100 hover:to-cyan-100"
+          >
+            <span>🗺️</span>
+            <span className="flex-1">MapFlow</span>
+            <span className="text-xs text-blue-400">↗</span>
+          </a>
 
           <div className="mt-2 mb-1">
             <span className="text-xs font-semibold text-gray-400 uppercase px-3">分类</span>

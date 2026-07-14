@@ -1,5 +1,6 @@
 import { db } from '@/lib/db'
 import WebsiteCard from '@/components/WebsiteCard'
+import MapFlowFeature from '@/components/MapFlowFeature'
 
 export const dynamic = 'force-dynamic'
 
@@ -21,6 +22,8 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-10">
+      <MapFlowFeature />
+
       {hotWebsites.length > 0 && (
         <section>
           <h2 className="text-lg font-bold text-gray-800 mb-4">🔥 热门推荐</h2>
