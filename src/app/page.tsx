@@ -1,6 +1,7 @@
 import { db } from '@/lib/db'
 import WebsiteCard from '@/components/WebsiteCard'
 import MapFlowFeature from '@/components/MapFlowFeature'
+import SolarTermsFeature from '@/components/SolarTermsFeature'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,6 +24,7 @@ export default async function HomePage() {
   return (
     <div className="space-y-10">
       <MapFlowFeature />
+      <SolarTermsFeature />
 
       {hotWebsites.length > 0 && (
         <section>
