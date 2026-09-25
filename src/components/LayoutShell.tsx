@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 
@@ -17,6 +18,7 @@ export default function LayoutShell({
   categories: Category[]
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -36,6 +38,10 @@ export default function LayoutShell({
   }, [sidebarOpen, mounted])
 
   const toggleSidebar = () => setSidebarOpen((prev) => !prev)
+
+  if (pathname.startsWith('/travel/midautumn-2026')) {
+    return <>{children}</>
+  }
 
   if (!mounted) {
     // SSR placeholder — no sidebar flash
